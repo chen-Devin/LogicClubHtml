@@ -10,8 +10,29 @@
 
 <body>
     <div>
+        <h3>HTML 代码</h3>
+        <xmp>
+
+            <body>
+                <div>
+                    <span>已知开锁的五个条件，请正确推断出三位开锁密码</span>
+                    <ul>
+                        <li>246 一个号码正确，位置正确</li>
+                        <li>258 一个号码正确，位置不正确</li>
+                        <li>692 两个号码正确，位置都不正确</li>
+                        <li>174 没有一个号码正确</li>
+                        <li>419 一个号码正确，位置不正确</li>
+                    </ul>
+                </div>
+                <input type="button" onclick="inferPassword()" style="cursor: pointer;" value="开始推断">
+                <div>
+                    开锁密码为：<span class="password"></span>
+                </div>
+            </body>
+        </xmp>
+        <h3>js 代码</h3>
         <pre>
-            <code>
+            <code> 
                 var passwordSp = document.getElementsByClassName("password")[0];
                 //开锁密码获取方法
                 function inferPassword() {
@@ -52,7 +73,6 @@
                 }
                 //号码的正确个数
                 function NumberRightNum(one, two) {
-                    console.log(one);
                     var twoArr = String(two).split('');
                     var sameNumSun = 0;
                     for (var i = 0; i < twoArr.length; i++) {
