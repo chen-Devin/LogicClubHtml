@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>逻辑社代码</title>
+</head>
+
+<body>
+    <div>
+        <pre>
+            <code>
+                var passwordSp = document.getElementsByClassName("password")[0];
+                //开锁密码获取方法
+                function inferPassword() {
+                    var passwordVal = [];
+                    for (var i = 0; i < 1000; i++) {
+                        var item = i;
+                        if (i.toString().length == 1) {
+                            item = "00" + i;
+                        } else if (i.toString().length == 2) {
+                            item = "0" + i;
+                        }
+                        // 246 一个号码正确，位置正确
+                        if (NumberRightNum(item, 246) != 1 || CorrectPositionNum(item, 246) != 1) {
+                            continue;
+                        }
+                        // 258 一个号码正确，位置不正确
+                        else if (NumberRightNum(item, 258) != 1 || CorrectPositionNum(item, 258) != 0) {
+                            continue;
+                        }
+                        // 692 两个号码正确，位置都不正确
+                        else if (NumberRightNum(item, 692) != 2 || CorrectPositionNum(item, 692) != 0) {
+                            continue;
+                        }
+                        // 174 没有一个号码正确
+                        else if (NumberRightNum(item, 174) != 0 || CorrectPositionNum(item, 174) != 0) {
+                            continue;
+                        }
+                        // 419 一个号码正确，位置不正确
+                        else if (NumberRightNum(item, 419) != 1 || CorrectPositionNum(item, 419) != 0) {
+                            continue;
+                        }
+                        //全都满足，则说明是该值
+                        else {
+                            passwordVal.push(item);
+                        }
+                    }
+                    passwordSp.innerHTML = passwordVal.join();
+                }
+                //号码的正确个数
+                function NumberRightNum(one, two) {
+                    console.log(one);
+                    var twoArr = String(two).split('');
+                    var sameNumSun = 0;
+                    for (var i = 0; i < twoArr.length; i++) {
+                        if (String(one).indexOf(twoArr[i]) != -1) {
+                            sameNumSun++;
+                        }
+                    }
+                    return sameNumSun;
+                }
+                //号码位置正确个数
+                function CorrectPositionNum(one, two) {
+                    var positionNumSum = 0;
+                    if (parseInt(one / 100) === parseInt(two / 100)) {
+                        positionNumSum++;
+                    }
+                    if (parseInt(one % 100 / 10) === parseInt(two % 100 / 10)) {
+                        positionNumSum++;
+                    }
+                    if ((one % 10) === (two % 10)) {
+                        positionNumSum++;
+                    }
+                    return positionNumSum;
+                }
+            </code>
+        </pre>
+    </div>
+</body>
+
+</html>
